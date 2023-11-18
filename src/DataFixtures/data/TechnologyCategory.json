@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Linter"
+  },
+  {
+    "name": "Runtime"
+  },
+  {
+    "name": "Testing Library"
+  },
+  {
+    "name": "Framework"
+  },
+  {
+    "name": "State Management"
+  },
+  {
+    "name": "Routing"
+  },
+  {
+    "name": "UI Component Library"
+  },
+  {
+    "name": "Frontend"
+  },
+  {
+    "name": "Backend"
+  }
+]
