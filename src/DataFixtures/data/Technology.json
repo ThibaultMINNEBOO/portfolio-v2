@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Eslint"
+  },
+  {
+    "name": "Composer"
+  },
+  {
+    "name": "PHP"
+  },
+  {
+    "name": "NPM"
+  },
+  {
+    "name": "Laravel"
+  },
+  {
+    "name": "VueJS"
+  },
+  {
+    "name": "ReactJS"
+  },
+  {
+    "name": "AngularJS"
+  },
+  {
+    "name": "NodeJS"
+  },
+  {
+    "name": "ExpressJS"
+  },
+  {
+    "name": "MongoDB"
+  },
+  {
+    "name": "MySQL"
+  },
+  {
+    "name": "PostgreSQL"
+  },
+  {
+    "name": "Symfony"
+  }
+]

@@ -29,10 +29,23 @@ class Technology
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
     private \DateTimeImmutable $updatedAt;
 
+    public function getUpdatedAt(): \DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): Technology
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
     }
+
+
 
     public function getImageFile(): ?File
     {

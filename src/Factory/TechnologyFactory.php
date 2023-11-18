@@ -48,7 +48,8 @@ final class TechnologyFactory extends ModelFactory
     {
         return [
             'name' => self::faker()->word(),
-            'updatedAt' => self::faker()->dateTimeBetween('-100 days', '-1 days'),
+            'description' => self::faker()->realText(500),
+            'updatedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTimeBetween('-100 days', '-1 days')),
         ];
     }
 
