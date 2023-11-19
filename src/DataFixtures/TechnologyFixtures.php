@@ -4,9 +4,10 @@ namespace App\DataFixtures;
 
 use App\Factory\TechnologyFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class TechnologyFixtures extends Fixture
+class TechnologyFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -15,5 +16,12 @@ class TechnologyFixtures extends Fixture
         foreach ($technologies as $technology) {
             TechnologyFactory::createOne(['name' => $technology['name']]);
         }
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            TechnologyCategoryFixtures::class,
+        ];
     }
 }
