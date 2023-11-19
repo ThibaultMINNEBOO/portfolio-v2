@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Factory\TechnologyCategoryFactory;
 use App\Factory\TechnologyFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -14,7 +15,7 @@ class TechnologyFixtures extends Fixture implements DependentFixtureInterface
         $technologies = json_decode(file_get_contents(__DIR__.'/data/Technology.json'), true);
 
         foreach ($technologies as $technology) {
-            TechnologyFactory::createOne(['name' => $technology['name']]);
+            TechnologyFactory::createOne(['name' => $technology['name'], 'categories' => TechnologyCategoryFactory::randomRange(0, 3)]);
         }
     }
 
