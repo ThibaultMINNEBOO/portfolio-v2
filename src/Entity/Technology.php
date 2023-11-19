@@ -46,6 +46,7 @@ class Technology
     {
         $this->updatedAt = new \DateTimeImmutable();
         $this->categories = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
 
@@ -72,6 +73,9 @@ class Technology
 
     #[ORM\ManyToMany(targetEntity: TechnologyCategory::class, inversedBy: 'technologies')]
     private Collection $categories;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'technologies')]
+    private Collection $projects;
 
 
 
@@ -148,6 +152,33 @@ class Technology
     public function removeCategory(TechnologyCategory $category): static
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): static
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
+            $project->addTechnology($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): static
+    {
+        if ($this->projects->removeElement($project)) {
+            $project->removeTechnology($this);
+        }
 
         return $this;
     }
