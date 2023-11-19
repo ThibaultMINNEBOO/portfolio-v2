@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TechnologyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
@@ -43,6 +45,7 @@ class Technology
     public function __construct()
     {
         $this->updatedAt = new \DateTimeImmutable();
+        $this->categories = new ArrayCollection();
     }
 
 
@@ -66,6 +69,9 @@ class Technology
 
     #[ORM\Column(nullable: true)]
     private ?int $imageSize = null;
+
+    #[ORM\ManyToMany(targetEntity: TechnologyCategory::class, inversedBy: 'technologies')]
+    private Collection $categories;
 
 
 
@@ -118,6 +124,30 @@ class Technology
     public function setImageSize(?int $imageSize): static
     {
         $this->imageSize = $imageSize;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TechnologyCategory>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(TechnologyCategory $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(TechnologyCategory $category): static
+    {
+        $this->categories->removeElement($category);
 
         return $this;
     }
