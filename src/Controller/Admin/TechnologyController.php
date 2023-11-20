@@ -45,4 +45,23 @@ class TechnologyController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/admin/technology/{id}/edit', name: 'app_technology_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager, Technology $technology)
+    {
+        $form = $this->createForm(TechnologyType::class, $technology);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_technology');
+        }
+
+        return $this->render('admin/technology/edit.html.twig', [
+            'form' => $form,
+            'technology' => $technology,
+        ]);
+    }
 }
