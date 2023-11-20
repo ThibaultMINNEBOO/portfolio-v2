@@ -44,7 +44,7 @@
                         </thead>
                         <tbody>
                             {% for technology in technologies %}
-                                {{ include('admin/technologies/_technology.html.twig', {technology}) }}
+                                {{ include('admin/technology/_technology.html.twig', {technology}) }}
                             {% else %}
                                 <tr class="border-b dark:border-gray-700">
                                     <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">No data found.</th>
