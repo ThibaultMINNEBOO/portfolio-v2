@@ -64,4 +64,13 @@ class TechnologyController extends AbstractController
             'technology' => $technology,
         ]);
     }
+
+    #[Route('/admin/technology/{id}/delete', name: 'app_technology_delete')]
+    public function delete(Technology $technology, EntityManagerInterface $entityManager)
+    {
+        $entityManager->remove($technology);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_technology');
+    }
 }
