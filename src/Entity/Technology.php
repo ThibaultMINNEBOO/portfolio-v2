@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: TechnologyRepository::class)]
@@ -20,6 +21,13 @@ class Technology
     private ?int $id = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank]
+    #[Assert\Length(
+        min: 2,
+        max: 20,
+        minMessage: 'Le nom de la technologie doit faire au moins {{ limit }} caractères.',
+        maxMessage: 'Le nom de la technologie doit faire au maximum {{ limit }} caractères.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -39,6 +47,7 @@ class Technology
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): Technology
     {
         $this->updatedAt = $updatedAt;
+
         return $this;
     }
 
@@ -48,8 +57,6 @@ class Technology
         $this->categories = new ArrayCollection();
         $this->projects = new ArrayCollection();
     }
-
-
 
     public function getImageFile(): ?File
     {
@@ -76,8 +83,6 @@ class Technology
 
     #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'technologies')]
     private Collection $projects;
-
-
 
     public function getId(): ?int
     {

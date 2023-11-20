@@ -1,8 +1,13 @@
+{% form_theme form 'form/form_errors.html.twig' %}
+
 {{ form_start(form) }}
     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div class="sm:col-span-2">
             {{ form_label(form.name, 'Nom de la technologie', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
             {{ form_widget(form.name, {'attr': {'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'}}) }}
+            <div class="text-red">
+                {{ form_errors(form.name, {'attr': {'class': 'text-red'}}) }}
+            </div>
         </div>
         <div class="sm:col-span-2">
             {{ form_label(form.categories, 'Catégories', {'label_attr': {'class': 'block mb-2 text-sm font-medium text-gray-900 dark:text-white'}}) }}
