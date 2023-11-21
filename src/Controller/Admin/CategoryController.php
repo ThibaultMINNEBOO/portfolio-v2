@@ -54,4 +54,24 @@ class CategoryController extends AbstractController
         return $this->redirectToRoute('app_admin_category');
     }
 
+    #[Route('/admin/category/new', name: 'app_category_create')]
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $category = new TechnologyCategory();
+
+        $form = $this->createForm(TechnologyCategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($category);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_category');
+        }
+
+        return $this->render('admin/category/create.html.twig', [
+            'form' => $form,
+        ]);
+    }
 }
