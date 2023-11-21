@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Edition de la catégorie {{ category.name }}{% endblock %}
+
+{% block body %}
+    <section class="bg-white dark:bg-gray-900">
+        <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+            <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Modifier la catégorie <span class="font-weight-bolder text-blue-700">{{ category.name }}</span></h2>
+            {{ include('admin/category/_form.html.twig', {form, submit_label: 'Modifier'}, with_context=false) }}
+        </div>
+    </section>
+{% endblock %}
